@@ -10,12 +10,14 @@ import yahoo_fin.stock_info as si
 from django.utils.dateparse import parse_duration
 
 
-i = 0
+
 scheduler = BackgroundScheduler(settings.SCHEDULER_CONFIG)
 # This is the function you want to schedule - add as many as you want and then register them in the start() function below
 
 
 def check15min():
+    global i 
+    i = 0
     query = Tracking.objects.values('nome_ativo').distinct()
     for nome in query:
         ativo = Ativo(nome_ativo=nome['nome_ativo'],valor=si.get_live_price(nome['nome_ativo']))
