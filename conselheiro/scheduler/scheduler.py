@@ -13,12 +13,7 @@ from django.utils.dateparse import parse_duration
 i = 0
 scheduler = BackgroundScheduler(settings.SCHEDULER_CONFIG)
 # This is the function you want to schedule - add as many as you want and then register them in the start() function below
-def teste1min():
-    assunto = 'assunto-teste'
-    msg = 'msg-teste'
-    enviado_de = settings.EMAIL_HOST_USER
-    para_lista = ['s.outeiro14@gmail.com',]
-    send_mail(assunto,msg,enviado_de,para_lista)
+
 
 def check15min():
     query = Tracking.objects.values('nome_ativo').distinct()
@@ -39,6 +34,7 @@ def check15min():
                 upper_bound_trigger(tracking.user, ativo.nome_ativo)
             elif tracking.lower_bound > ativo.valor:
                 lower_bound_trigger(tracking.user,ativo.nome_ativo)
+        i = i +1
 
 def upper_bound_trigger(user_id,nome_ativo):
     user = User.objects.get(pk=user_id)
@@ -60,6 +56,6 @@ def lower_bound_trigger(user_id,nome_ativo):
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(teste1min, 'interval', minutes=1, name='clean_accounts', replace_existing=True)
+    scheduler.add_job(teste15min, 'interval', minutes=1, name='clean_accounts', replace_existing=True)
     register_events(scheduler)
     scheduler.start()
