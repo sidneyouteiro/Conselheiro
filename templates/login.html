@@ -8,6 +8,10 @@
         <form class='form-signin' action='{% url 'loginPage' %}' method='post'>
             {% csrf_token %}
             <h1 class='h3 mb-7'>Conselheiro</h4>
+
+            {% if msg|length > 0 %}
+                <h5 class='h5 text-sm-left text-danger'>{{msg}}</h5>
+            {% endif %}
             
             {{ form.usuario }}
 

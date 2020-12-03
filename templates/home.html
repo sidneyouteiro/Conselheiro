@@ -1,4 +1,69 @@
 {% extends 'pos_login_base.html' %}
-{% block body %}
-<h1>Teste</h1>
-{% endblock body %}
+{% block content %}
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;width:100%;position:relative}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-cell{text-align:left;vertical-align:top}
+    .amarelo {background-color:#fffe65}
+</style>
+
+<div class='row'>
+    <div class='col-8 justify-content-center mx-auto'>
+        <div class='mt-5 p-3 card'>
+            <div class='row'>
+                <div class='col-8 ml-3'>
+                    <h3 class='h3' >Ativos</button>
+                </div>
+
+
+                <div class='col-3 ml-5'>
+                    <a href={% url 'addAtivosPage' %}><button class='btn btn-lg btn-success' >Adicionar Ativo<span>+</span></button></a>
+                </div>
+            </div>
+
+            <div class='row'>
+                {% if ativos %}
+                    <table class="tg mt-3">
+                    <thead>
+                      <tr>
+                        <th class="tg-cell amarelo">Ticker<br></th>
+                        <th class="tg-cell amarelo">Periodicidade(min)<br></th>
+                        <th class="tg-cell amarelo">Upper Bound<br></th>
+                        <th class="tg-cell amarelo">Lower Bound</th>
+                        <th class="tg-cell amarelo">Preço atual</th>
+                        <th class="tg-cell amarelo"></th>
+                      </tr>
+                    </thead>
+                    {% for ativo, preco_ativo in ativos %}
+                        <tbody>
+                          <tr>
+                            <td class="tg-cell">{{ativo.nome_ativo}}</td>
+                            <td class="tg-cell">{{ativo.periodicidade}}</td>
+                            <td class="tg-cell">{{ativo.upper_bound}}</td>
+                            <td class="tg-cell">{{ativo.lower_bound}}</td>
+                            <td class="tg-cell">{{preco_ativo}}</td>
+                            <td class="tg-cell">
+                                <div class="btn-group">
+                                    <a href={% url 'attTrackingPage' pk=ativo.id %}>
+                                        <button class="btn btn-warning">Editar</button>
+                                    </a>
+                                    <a href={% url 'delTrackingPage' pk=ativo.id %}>
+                                        <button class="btn btn-danger">Deletar</button>
+                                    </a>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                        
+                    {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

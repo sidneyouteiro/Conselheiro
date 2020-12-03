@@ -1,0 +1,22 @@
+{% extends 'pos_login_base.html' %}
+{% block content %}
+<div class='row'>
+    <div class='col-11 d-flex justify-content-center '>
+        <div class='mt-5 p-5 card'>
+
+        
+        <form class='form-signin' action='{% url 'attEmailPage' user.id %}' method='post'>
+            {% csrf_token %}
+            <h1 class='h3 mb-7'>Atualizar Email</h4>
+
+            {% for field in form %}
+                {{field}}
+            {% endfor %}
+            
+            <button class="btn btn-lg btn-success btn-block mt-3" type="submit">Atualizar</button>
+        </form>
+
+        </div>
+    </div>
+</div>
+{% endblock content%}

@@ -15,5 +15,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Ativos)
 admin.site.register(Tracking)

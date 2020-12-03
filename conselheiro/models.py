@@ -1,19 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from datetime import datetime
+from django.utils import timezone
 
 class User(AbstractUser):
     periodo = models.DurationField(null=True,blank=True)
-    def get_(self):
-        pass
-class Ativos(models.Model):
-    nome = models.CharField(max_length=10)
-    usuarios = models.ManyToManyField(User)
-    preco = models.DecimalField(max_digits=16,decimal_places=2)
 
-class Tracking(models.Model):
+class Tracking(models.Model): 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ativo = models.ForeignKey(Ativos, on_delete=models.CASCADE)
+    nome_ativo = models.CharField(max_length=15)
     upper_bound = models.DecimalField(max_digits=16,decimal_places=2)
     lower_bound = models.DecimalField(max_digits=16,decimal_places=2)
-    
+    periodicidade = models.DurationField()
+
+    def __unicode__(self):
+        return u"%s" % self.user
+
+class Ativo(models.Model):
+    nome_ativo = models.CharField(max_length=15)
+    valor = models.DecimalField(max_digits=16,decimal_places=3)
+    timestamp = models.DateTimeField(default=timezone.now)

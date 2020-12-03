@@ -1,0 +1,18 @@
+{% extends 'pos_login_base.html' %}
+{% block content %}
+<div class='row'>
+    <div class='col-11 d-flex justify-content-center '>
+        <div class='mt-5 p-5 card'>
+
+        
+        <form class='form-signin' action='{% url 'delTrackingPage' object.id %}' method='post'>
+            {% csrf_token %}
+            <h1 class='h3 mb-7'>Deseja deletar o acompanhamento do ativo {{object.nome_ativo}}?</h4>
+            
+            <button class="btn btn-lg btn-success btn-block mt-3" type="submit">Deletar</button>
+        </form>
+
+        </div>
+    </div>
+</div>
+{% endblock content%}

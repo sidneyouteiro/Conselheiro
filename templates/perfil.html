@@ -6,6 +6,8 @@
         <h4>Perfil</h4>
         <label>Login: {{user}}</label>
         <label>Email: {{user.email}}</label>
+        <br>
+        <p><a href={% url 'attEmailPage' user.id %}>Alterar email</a></p>
         </div>
     </div>
 </div>

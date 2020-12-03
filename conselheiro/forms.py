@@ -26,33 +26,36 @@ class FormsLogin(forms.Form):
          'id':'Senha',
      }))
 
+class FormsAddAtivo(forms.Form):
+    nome_ativo = forms.CharField(max_length=10,widget=forms.TextInput(attrs={
+        'class':'form-control mb-3',
+         'placeholder':'Ticker do Ativo',
+         'id':'nome_ativo',
+    }))
 
-# class FormsRegistro(forms.Form):
-#     nome = forms.CharField(max_length=100,widget=forms.TextInput(attrs={
-#         'class':'form-control mb-3',
-#         'placeholder':'Nome',
-#         'id':'Nome',
-#     }))
-    
-#     email = forms.EmailField(max_length=100,widget=forms.EmailInput(attrs={
-#         'class':'form-control mb-3',
-#         'placeholder':'Email',
-#         'id':'Email',
-#     }))
+    periodo = (
+        (None,'Periodicidade do Ativo'),
+        ('00:15:00','00:15:00'),
+        ('00:30:00','00:30:00'),
+        ('00:45:00','00:45:00'))
+    periodicidade = forms.ChoiceField(choices=periodo,widget=forms.Select(attrs={
+        'class':'form-control mb-3',
+         'placeholder':'Ticker do Ativo',
+         'id':'periodicidade',
+    }))
 
-#     senha1 = forms.CharField(max_length=100,widget=forms.PasswordInput(attrs={
-#         'class':'form-control mb-3',
-#         'placeholder':'Senha',
-#         'id':'Senha1',
-#     }))
+    upper_bound = forms.DecimalField(widget=forms.TextInput(attrs={
+        'class':'form-control mb-3',
+        'placeholder':'Upper Bound do Ativo',
+        'id':'upper_bound',
+    }))
 
-#     senha2 = forms.CharField(max_length=100,widget=forms.PasswordInput(attrs={
-#         'class':'form-control',
-#         'placeholder':'Digite novamente a senha',
-#         'id':'Senha2',
-#     }))
+    lower_bound = forms.DecimalField(widget=forms.TextInput(attrs={
+        'class':'form-control mb-3',
+        'placeholder':'Lower Bound do Ativo',
+        'id':'lower_bound',
+    }))
 
-# class bdRegistro(UserCreationForm):
-#     class Meta:
-#         model = Usuario
-#         fields = ('nome','senha','email')
+    class Meta:
+        model = Tracking
+        fields = ('nome_ativo','periodicidade','upper_bound','lower_bound')
